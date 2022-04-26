@@ -45,9 +45,9 @@ void setup()
 
 void loop()
 {
-        char c[10];
+        char c[10];             // Vetor que irá armazenar os dados preenchidos pelo usuário.
         
-        String memoria[] =
+        String memoria[] =      // Vetor memória pré-preenchido.
         { 
                 "-1","-1","-1","-1","-1","-1","-1","-1","-1","-1",
                 "-1","-1","-1","-1","-1","-1","-1","-1","-1","-1",
@@ -88,6 +88,11 @@ void loop()
                                 i++;
                                 
                                 int j = 0;
+
+                                digitalWrite(F3, S & 0x8);
+                                digitalWrite(F2, S & 0x4);
+                                digitalWrite(F1, S & 0x2);
+                                digitalWrite(F0, S & 0x1);
 
                                 Serial.print("> ");
                                 while(!memoria[j].equals("-1"))
