@@ -14,11 +14,11 @@ nesse Hardware. O resultado será observado nos 4 Leds conectados no Hardware ex
 
 ## Prints
 
-![]()
 * Arduino IDE
+![](https://raw.githubusercontent.com/pedroigorreis/ARQRel04/main/Prints/printArduino.png)
 
-![]()
 * TinkerCad
+![](https://raw.githubusercontent.com/pedroigorreis/ARQRel04/main/Prints/printTikerCad.png)
 
-![]()
 * Conversão de dados
+![](https://raw.githubusercontent.com/pedroigorreis/ARQRel04/main/Prints/printConversor.png)
