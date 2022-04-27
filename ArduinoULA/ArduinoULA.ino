@@ -24,7 +24,12 @@ void nAxB()     { S = ~(X ^ Y); }       // (A⊕B)'
 void nAoB()     { S = ~(X | Y); }       // (A+B)’
 void nAeB()     { S = ~(X & Y); }       // (AB)'
 
-void (*operacoes[16])() = { An, nAoB, AnB, zeroL, nAeB, Bn, AxB, ABn, AnoB, nAxB, copiaB, AB, umL, AoBn, AoB, copiaA }; // Ordem das operacões seguindo a tabela.
+void (*operacoes[16])() = // Ordem das operacões seguindo a tabela.
+{ 
+        An, nAoB, AnB, zeroL, nAeB, 
+        Bn, AxB, ABn, AnoB, nAxB, copiaB,
+        AB, umL, AoBn, AoB, copiaA 
+}; 
 
 int converteInteiro(char C)    // Hexadecimal para inteiro.
 {
@@ -93,6 +98,8 @@ void loop()
                                 digitalWrite(F2, S & 0x4);
                                 digitalWrite(F1, S & 0x2);
                                 digitalWrite(F0, S & 0x1);
+
+                                delay(2000);
 
                                 Serial.print("> ");
                                 while(!memoria[j].equals("-1"))
