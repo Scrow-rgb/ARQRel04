@@ -24,12 +24,7 @@ void nAxB()     { S = ~(X ^ Y); }       // (A⊕B)'
 void nAoB()     { S = ~(X | Y); }       // (A+B)’
 void nAeB()     { S = ~(X & Y); }       // (AB)'
 
-void (*operacoes[16])() = // Ordem das operacões seguindo a tabela.
-{ 
-        An, nAoB, AnB, zeroL, nAeB, 
-        Bn, AxB, ABn, AnoB, nAxB, copiaB,
-        AB, umL, AoBn, AoB, copiaA 
-}; 
+void (*operacoes[16])() = { An, nAoB, AnB, zeroL, nAeB, Bn, AxB, ABn, AnoB, nAxB, copiaB, AB, umL, AoBn, AoB, copiaA }; // Ordem das operacões seguindo a tabela.
 
 int converteInteiro(char C)    // Hexadecimal para inteiro.
 {
@@ -50,9 +45,9 @@ void setup()
 
 void loop()
 {
-        char c[10];             // Vetor que irá armazenar os dados preenchidos pelo usuário.
+        char c[10];
         
-        String memoria[] =      // Vetor memória pré-preenchido.
+        String memoria[] =
         { 
                 "-1","-1","-1","-1","-1","-1","-1","-1","-1","-1",
                 "-1","-1","-1","-1","-1","-1","-1","-1","-1","-1",
@@ -74,45 +69,43 @@ void loop()
         {
                 if(Serial.available() > 0)
                 {
-                        OP = Serial.readString();
+                        OP = Serial.readStringUntil(' ');
                         
                         if(!OP.equals("FIM")) 
                         { 
                                 OP.toCharArray(c,OP.length() + 1);
-                                
-                                X = converteInteiro(c[0]);              // → X ← Y W
-                                Y = converteInteiro(c[1]);              // X → Y ← W
-                                
-                                operacoes[converteInteiro(c[2])]();       // X Y → W ←
 
-                                memoria[i] = OP;
-                                memoria[0] = i;
-                                memoria[1] = String(S);
-                                memoria[2] = c[0];
-                                memoria[3] = c[1];
-                                i++;
-                                
-                                int j = 0;
-
-                                digitalWrite(F3, S & 0x8);
-                                digitalWrite(F2, S & 0x4);
-                                digitalWrite(F1, S & 0x2);
-                                digitalWrite(F0, S & 0x1);
-
-                                delay(2000);
-
-                                Serial.print("> ");
-                                while(!memoria[j].equals("-1"))
-                                {
-                                        Serial.print(" ");
-                                        Serial.print(memoria[j]);
-                                        j++;
-                                }
-                                Serial.println();                          
+                          	memoria[i] = OP;
+                          	i++;
                         }
                 }
         }
         while(!OP.equals("FIM"));
   
+  	i = 4;
+  		
+        while	
+        {       
+                memoria[i].toCharArray(c,memoria[i].length() +1);
+                X = converteInteiro(c[0]);
+                Y = converteInteiro(c[1]);
+                operacoes[converteInteiro(c[2])]();
+               
+                memoria[0] = i;
+         	memoria[1] = S;
+                memoria[2] = c[0];
+                memoria[3] = c[1]; 
+          
+                int j = 0;
+                Serial.print("> ");
+                while(!memoria[j].equals("-1")) 
+                {
+                        Serial.print(" ");
+                        Serial.print(memoria[j]);
+                        j++;
+                }
+                Serial.println();
+        }
         Serial.println("Programa encerrado.");
 }
+
